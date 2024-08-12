@@ -1,0 +1,53 @@
+---
+import Layout from "./Layout.astro";
+import dayjs from "dayjs";
+
+const { post, author } = Astro.props;
+---
+
+<Layout title={post.data.title}>
+    <div class="row m-5">
+        <div class="col-12 col-lg-8 offset-lg-2">
+            <div class="header-image"></div>
+            <h1>{post.data.title}</h1>
+            <div class="post-info">
+                <p>Escrito por: {author.data.name}</p>
+                <p>
+                    Publicado: {
+                        dayjs(post.data.publishedAt).format("DD/MM/YYYY")
+                    }
+                </p>
+                <p>Tags: {post.data.tags.join(", ")}</p>
+            </div>
+            <slot />
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .header-image {
+        background-image: url("/post-background-placeholder.png");
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+
+    .post-info {
+        margin-bottom: 1rem;
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #6c757d;
+    }
+
+    .post-info p {
+        margin-bottom: 0.5rem;
+    }
+
+    .post-info p:last-child {
+        margin-bottom: 0;
+    }
+</style>

@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import CardPost from "../components/card-post.astro";
+import AuthorsList from "../components/authors-list.astro";
+
+const posts = await getCollection("blog");
+console.log(posts);
+---
+
+<Layout title="Mi blog con Astro">
+	<h1>Mi blog</h1>
+	<div class="row">
+		<div class="col-12 col-lg-8">
+			<h3>Post más recientes</h3>
+			{posts.map((post) => <CardPost post={post} />)}
+		</div>
+		<div class="col-12 col-lg-4">
+			<AuthorsList />
+		</div>
+	</div>
+</Layout>
